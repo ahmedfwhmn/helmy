@@ -14,28 +14,27 @@
     }
   }
 
-  .video-grid {
-    display: grid;
-    gap: 2rem;
-    grid-template-columns: 1fr;
+  .video-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0.5rem;
   }
 
-  @media screen and (min-width: 750px) {
-    .video-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .video-carousel__container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
   }
 
-  @media screen and (min-width: 990px) {
-    .video-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
+  .video-carousel__slide {
+    min-width: 100%;
+    flex-shrink: 0;
   }
 
   .video-item {
     display: flex;
     flex-direction: column;
     height: 100%;
+    padding: 1rem;
   }
 
   .video-item__content {
@@ -45,20 +44,37 @@
   }
 
   .video-item__title {
-    margin: 1rem 0 0.5rem 0;
-    font-size: 1.2rem;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
     font-weight: 600;
+    text-align: center;
   }
 
   .video-item__description {
-    margin: 0.5rem 0 1rem 0;
+    margin: 1rem 0;
     color: rgba(var(--color-foreground), 0.75);
     line-height: 1.5;
+    text-align: center;
   }
 
   .video-item__button {
-    margin-top: auto;
-    align-self: flex-start;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  .video-item__button .button {
+    background: var(--color-button);
+    color: var(--color-button-text);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+  }
+
+  .video-item__button .button:hover {
+    opacity: 0.8;
   }
 
   .video-item__media {
@@ -66,6 +82,90 @@
     width: 100%;
     border-radius: 0.5rem;
     overflow: hidden;
+    margin-bottom: 1rem;
+  }
+
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+  }
+
+  .carousel-nav:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .carousel-nav--prev {
+    left: 1rem;
+  }
+
+  .carousel-nav--next {
+    right: 1rem;
+  }
+
+  .carousel-nav svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    fill: var(--color-foreground);
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .carousel-dot {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: rgba(var(--color-foreground), 0.3);
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .carousel-dot.active {
+    background: var(--color-foreground);
+  }
+
+  .deferred-media__poster-button {
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    transition: all 0.2s ease;
+  }
+
+  .deferred-media__poster-button:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+  }
+
+  .deferred-media__poster-button .svg-wrapper {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .deferred-media__poster-button .svg-wrapper svg {
+    fill: white;
   }
 {%- endstyle -%}
 
@@ -84,136 +184,219 @@
     </div>
 
     {%- if section.blocks.size > 0 -%}
-      <div class="video-grid">
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign video_id = block.settings.video.id | default: block.settings.video_url.id
-            assign video_alt = block.settings.video.alt | default: block.settings.description
-            assign alt = 'sections.video.load_video' | t: description: video_alt | escape
-            assign poster = block.settings.video.preview_image | default: block.settings.cover_image
+      <div class="video-carousel">
+        <div class="video-carousel__container" id="carousel-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign video_id = block.settings.video.id | default: block.settings.video_url.id
+              assign video_alt = block.settings.video.alt | default: block.settings.description
+              assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+              assign poster = block.settings.video.preview_image | default: block.settings.cover_image
+            -%}
 
-            if block.settings.video != null
-              assign ratio_diff = block.settings.video.aspect_ratio | minus: poster.aspect_ratio | abs
-              if ratio_diff < 0.01 and ratio_diff > 0
-                assign fix_ratio = true
-              endif
-            endif
-          -%}
+            {%- capture sizes -%}
+              {% if section.settings.full_width -%}
+                100vw
+              {%- else -%}
+                (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px)
+                calc(100vw - 10rem), 100vw
+              {%- endif %}
+            {%- endcapture -%}
 
-          {%- capture sizes -%}
-            {% if section.settings.full_width -%}
-              100vw
-            {%- else -%}
-              (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px)
-              calc(100vw - 10rem), 100vw
-            {%- endif %}
-          {%- endcapture -%}
+            <div class="video-carousel__slide">
+              <div class="video-item" {{ block.shopify_attributes }}>
+                <div class="video-item__content">
+                  {%- unless block.settings.title == blank -%}
+                    <h3 class="video-item__title">{{ block.settings.title }}</h3>
+                  {%- endunless -%}
 
-          <div class="video-item" {{ block.shopify_attributes }}>
-            <div class="video-item__content">
-              {%- unless block.settings.title == blank -%}
-                <h3 class="video-item__title">{{ block.settings.title }}</h3>
-              {%- endunless -%}
+                  <div class="video-item__media">
+                    <deferred-media
+                      class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                      data-media-id="{{ video_id }}-{{ forloop.index }}"
+                      {% if poster != null %}
+                        style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
+                      {% endif %}
+                    >
+                      <button
+                        id="Deferred-Poster-Modal-{{ video_id }}-{{ forloop.index }}"
+                        class="video-section__poster media deferred-media__poster media--landscape"
+                        type="button"
+                        aria-label="{{ alt }}"
+                      >
+                        {%- if poster != null -%}
+                          {{
+                            poster
+                            | image_url: width: 3840
+                            | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+                          }}
+                        {%- else -%}
+                          {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                        {%- endif -%}
+                        <span class="deferred-media__poster-button motion-reduce">
+                          <span class="svg-wrapper">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M8 5v14l11-7z"/>
+                            </svg>
+                          </span>
+                        </span>
+                      </button>
+                      <template>
+                        {%- if block.settings.video == null and block.settings.video_url != null -%}
+                          {%- liquid
+                            assign loop = ''
+                            if section.settings.enable_video_looping
+                              assign loop = '&loop=1&playlist=' | append: video_id
+                            endif
+                          -%}
+                          {%- if block.settings.video_url.type == 'youtube' -%}
+                            <iframe
+                              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+                              class="js-youtube"
+                              allow="autoplay; encrypted-media"
+                              allowfullscreen
+                              title="{{ block.settings.description | escape }}"
+                            ></iframe>
+                          {%- else -%}
+                            <iframe
+                              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+                              class="js-vimeo"
+                              allow="autoplay; encrypted-media"
+                              allowfullscreen
+                              title="{{ block.settings.description | escape }}"
+                            ></iframe>
+                          {%- endif -%}
+                        {%- else -%}
+                          {{
+                            block.settings.video
+                            | video_tag:
+                              image_size: '1100x',
+                              autoplay: true,
+                              loop: section.settings.enable_video_looping,
+                              controls: true,
+                              muted: false
+                          }}
+                        {%- endif -%}
+                      </template>
+                    </deferred-media>
+                  </div>
 
-              <div class="video-item__media">
-                <deferred-media
-                  class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if fix_ratio %} media-fit-cover{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                  data-media-id="{{ video_id }}-{{ forloop.index }}"
-                  {% if poster != null %}
-                    style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
-                  {% endif %}
-                >
-                  <button
-                    id="Deferred-Poster-Modal-{{ video_id }}-{{ forloop.index }}"
-                    class="video-section__poster media deferred-media__poster media--landscape"
-                    type="button"
-                    aria-label="{{ alt }}"
-                  >
-                    {%- if poster != null -%}
-                      {{
-                        poster
-                        | image_url: width: 3840
-                        | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
-                      }}
-                    {%- else -%}
-                      {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                    {%- endif -%}
-                    <span class="deferred-media__poster-button motion-reduce">
-                      <span class="svg-wrapper">
-                        {{- 'icon-play.svg' | inline_asset_content -}}
-                      </span>
-                    </span>
-                  </button>
-                  <template>
-                    {%- if block.settings.video == null and block.settings.video_url != null -%}
-                      {%- liquid
-                        assign loop = ''
-                        if section.settings.enable_video_looping
-                          assign loop = '&loop=1&playlist=' | append: video_id
-                        endif
-                      -%}
-                      {%- if block.settings.video_url.type == 'youtube' -%}
-                        <iframe
-                          src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
-                          class="js-youtube"
-                          allow="autoplay; encrypted-media"
-                          allowfullscreen
-                          title="{{ block.settings.description | escape }}"
-                        ></iframe>
-                      {%- else -%}
-                        <iframe
-                          src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
-                          class="js-vimeo"
-                          allow="autoplay; encrypted-media"
-                          allowfullscreen
-                          title="{{ block.settings.description | escape }}"
-                        ></iframe>
-                      {%- endif -%}
-                    {%- else -%}
-                      {{
-                        block.settings.video
-                        | video_tag:
-                          image_size: '1100x',
-                          autoplay: true,
-                          loop: section.settings.enable_video_looping,
-                          controls: true,
-                          muted: false
-                      }}
-                    {%- endif -%}
-                  </template>
-                </deferred-media>
-              </div>
+                  {%- unless block.settings.description == blank -%}
+                    <div class="video-item__description">{{ block.settings.description }}</div>
+                  {%- endunless -%}
 
-              {%- unless block.settings.description == blank -%}
-                <div class="video-item__description">{{ block.settings.description }}</div>
-              {%- endunless -%}
-
-              {%- unless block.settings.button_text == blank or block.settings.button_link == blank -%}
-                <div class="video-item__button">
-                  <a href="{{ block.settings.button_link }}" class="button button--primary">
-                    {{ block.settings.button_text }}
-                  </a>
+                  {%- unless block.settings.button_text == blank or block.settings.button_link == blank -%}
+                    <div class="video-item__button">
+                      <a href="{{ block.settings.button_link }}" class="button">
+                        {{ block.settings.button_text }}
+                      </a>
+                    </div>
+                  {%- endunless -%}
                 </div>
-              {%- endunless -%}
+              </div>
             </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.blocks.size > 1 -%}
+          <button class="carousel-nav carousel-nav--prev" onclick="moveCarousel({{ section.id }}, -1)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+          </button>
+          <button class="carousel-nav carousel-nav--next" onclick="moveCarousel({{ section.id }}, 1)">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+            </svg>
+          </button>
+
+          <div class="carousel-dots">
+            {%- for block in section.blocks -%}
+              <button 
+                class="carousel-dot{% if forloop.first %} active{% endif %}" 
+                onclick="goToSlide({{ section.id }}, {{ forloop.index0 }})"
+              ></button>
+            {%- endfor -%}
           </div>
-        {%- endfor -%}
+        {%- endif -%}
       </div>
     {%- else -%}
-      <div class="video-grid">
-        <div class="video-item">
-          <div class="video-item__content">
-            <h3 class="video-item__title">Sample Video</h3>
-            <div class="video-item__media">
-              {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+      <div class="video-carousel">
+        <div class="video-carousel__container">
+          <div class="video-carousel__slide">
+            <div class="video-item">
+              <div class="video-item__content">
+                <h3 class="video-item__title">Sample Video</h3>
+                <div class="video-item__media">
+                  {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                </div>
+                <div class="video-item__description">Add your first video using the theme editor.</div>
+              </div>
             </div>
-            <div class="video-item__description">Add your first video using the theme editor.</div>
           </div>
         </div>
       </div>
     {%- endif -%}
   </div>
 </div>
+
+<script>
+  let currentSlide = {};
+  
+  function moveCarousel(sectionId, direction) {
+    const container = document.getElementById(`carousel-${sectionId}`);
+    const slides = container.children;
+    const totalSlides = slides.length;
+    
+    if (!currentSlide[sectionId]) {
+      currentSlide[sectionId] = 0;
+    }
+    
+    currentSlide[sectionId] += direction;
+    
+    if (currentSlide[sectionId] >= totalSlides) {
+      currentSlide[sectionId] = 0;
+    } else if (currentSlide[sectionId] < 0) {
+      currentSlide[sectionId] = totalSlides - 1;
+    }
+    
+    updateCarousel(sectionId);
+  }
+  
+  function goToSlide(sectionId, slideIndex) {
+    currentSlide[sectionId] = slideIndex;
+    updateCarousel(sectionId);
+  }
+  
+  function updateCarousel(sectionId) {
+    const container = document.getElementById(`carousel-${sectionId}`);
+    const dots = container.parentElement.querySelectorAll('.carousel-dot');
+    
+    // Update slide position
+    container.style.transform = `translateX(-${currentSlide[sectionId] * 100}%)`;
+    
+    // Update dots
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentSlide[sectionId]);
+    });
+  }
+  
+  // Auto-play functionality (optional)
+  function startAutoPlay(sectionId) {
+    setInterval(() => {
+      moveCarousel(sectionId, 1);
+    }, 5000); // Change slide every 5 seconds
+  }
+  
+  // Initialize carousels
+  document.addEventListener('DOMContentLoaded', function() {
+    const carousels = document.querySelectorAll('.video-carousel');
+    carousels.forEach(carousel => {
+      const sectionId = carousel.querySelector('.video-carousel__container').id.replace('carousel-', '');
+      currentSlide[sectionId] = 0;
+    });
+  });
+</script>
 
 {% schema %}
 {
