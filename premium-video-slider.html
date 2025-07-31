@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Video Slider - سلايدر فيديو فخم ومتطور 2025</title>
+    <meta name="description" content="تصميم راقي مع تأثيرات بصرية مذهلة وتفاعل متقدم">
+    
+    <!-- تحسين الأداء -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .premium-video-slider {
+            position: relative;
+            padding: 120px 0;
+            background: linear-gradient(135deg, 
+                #0f0f23 0%, 
+                #1a1a2e 15%, 
+                #16213e 35%, 
+                #0f3460 60%, 
+                #533483 85%, 
+                #6d28d9 100%);
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .premium-video-slider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.4) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.4) 0%, transparent 60%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.3) 0%, transparent 60%),
+                radial-gradient(circle at 60% 80%, rgba(236, 72, 153, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            animation: backgroundPulse 25s ease-in-out infinite;
+        }
+
+        @keyframes backgroundPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            25% { opacity: 0.8; transform: scale(1.05); }
+            50% { opacity: 0.9; transform: scale(1.02); }
+            75% { opacity: 0.7; transform: scale(1.08); }
+        }
+
+        /* جسيمات عائمة محسنة */
+        .floating-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .particle-small {
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.7);
+            animation: floatSmall 20s infinite linear;
+        }
+
+        .particle-medium {
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(45deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8));
+            animation: floatMedium 25s infinite linear;
+        }
+
+        .particle-large {
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(45deg, rgba(236, 72, 153, 0.6), rgba(168, 85, 247, 0.6));
+            animation: floatLarge 30s infinite linear;
+        }
+
+        @keyframes floatSmall {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(50px) scale(1); opacity: 0; }
+        }
+
+        @keyframes floatMedium {
+            0% { transform: translateY(100vh) translateX(0) scale(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-30px) scale(1) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes floatLarge {
+            0% { transform: translateY(100vh) translateX(0) scale(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(80px) scale(1) rotate(-360deg); opacity: 0; }
+        }
+
+        .premium-container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 50px;
+            position: relative;
+            z-index: 10;
+            width: 100%;
+        }
+
+        .premium-header {
+            text-align: center;
+            margin-bottom: 100px;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .premium-title {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, 
+                #ffffff 0%, 
+                #f8fafc 20%, 
+                #e2e8f0 40%, 
+                #cbd5e1 60%, 
+                #94a3b8 80%, 
+                #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 40px;
+            line-height: 1.1;
+            text-shadow: 0 0 60px rgba(255, 255, 255, 0.6);
+            animation: titleGlow 4s ease-in-out infinite alternate;
+            position: relative;
+        }
+
+        .premium-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, #ec4899, transparent);
+            border-radius: 2px;
+            animation: underlineGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0% { 
+                text-shadow: 0 0 60px rgba(255, 255, 255, 0.6), 0 0 100px rgba(255, 255, 255, 0.3); 
+                filter: brightness(1);
+            }
+            100% { 
+                text-shadow: 0 0 80px rgba(255, 255, 255, 0.9), 0 0 140px rgba(255, 255, 255, 0.5); 
+                filter: brightness(1.2);
+            }
+        }
+
+        @keyframes underlineGlow {
+            0%, 100% { opacity: 0.7; transform: translateX(-50%) scaleX(1); }
+            50% { opacity: 1; transform: translateX(-50%) scaleX(1.2); }
+        }
+
+        .premium-subtitle {
+            font-size: 1.6rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 1s ease-out 0.5s both;
+            font-weight: 400;
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* السلايدر المحسن */
+        .premium-slider-wrapper {
+            position: relative;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 
+                0 60px 120px -20px rgba(0, 0, 0, 0.9),
+                0 0 0 1px rgba(255, 255, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.12), 
+                rgba(255, 255, 255, 0.08), 
+                rgba(255, 255, 255, 0.04));
+            backdrop-filter: blur(25px);
+            transform: perspective(1200px) rotateX(3deg);
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: slideIn 1.2s ease-out 0.8s both;
+        }
+
+        @keyframes slideIn {
+            0% { opacity: 0; transform: perspective(1200px) rotateX(10deg) translateY(100px); }
+            100% { opacity: 1; transform: perspective(1200px) rotateX(3deg) translateY(0); }
+        }
+
+        .premium-slider-wrapper:hover {
+            transform: perspective(1200px) rotateX(0deg) scale(1.03);
+            box-shadow: 
+                0 80px 160px -20px rgba(0, 0, 0, 0.95),
+                0 0 0 1px rgba(255, 255, 255, 0.25),
+                inset 0 2px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .premium-slides-track {
+            display: flex;
+            transition: transform 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+            width: 100%;
+        }
+
+        .premium-slide {
+            min-width: 100%;
+            display: flex;
+            align-items: stretch;
+            background: linear-gradient(135deg, 
+                rgba(15, 15, 35, 0.98) 0%, 
+                rgba(26, 26, 46, 0.96) 50%, 
+                rgba(31, 41, 55, 0.98) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(120, 119, 198, 0.15) 0%, 
+                transparent 30%, 
+                transparent 70%, 
+                rgba(255, 119, 198, 0.15) 100%);
+            pointer-events: none;
+            animation: slideShimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes slideShimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .premium-content-wrapper {
+            display: flex;
+            width: 100%;
+            min-height: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* حاوي الفيديو المحسن */
+        .premium-video-container {
+            flex: 1.3;
+            position: relative;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .premium-video-aspect {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        .premium-video iframe,
+        .premium-video video {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            border: none;
+            display: block;
+            border-radius: 0;
+        }
+
+        .premium-video-cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 15;
+            transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .premium-video-cover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.4) 0%, 
+                rgba(0, 0, 0, 0.2) 50%, 
+                rgba(0, 0, 0, 0.5) 100%);
+            backdrop-filter: blur(2px);
+            transition: all 0.5s ease;
+        }
+
+        .premium-video-cover:hover::before {
+            background: linear-gradient(135deg, 
+                rgba(0, 0, 0, 0.3) 0%, 
+                rgba(0, 0, 0, 0.1) 50%, 
+                rgba(0, 0, 0, 0.4) 100%);
+        }
+
+        .premium-video-cover.hidden {
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+            transform: scale(1.1);
+        }
+
+        /* زر التشغيل المحسن */
+        .premium-play-button {
+            width: 140px;
+            height: 140px;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.98) 0%, 
+                rgba(255, 255, 255, 0.92) 50%, 
+                rgba(255, 255, 255, 0.95) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.5),
+                0 0 0 0 rgba(255, 255, 255, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.7);
+            position: relative;
+            z-index: 20;
+            animation: playButtonPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes playButtonPulse {
+            0% { 
+                box-shadow: 
+                    0 25px 50px rgba(0, 0, 0, 0.5),
+                    0 0 0 0 rgba(255, 255, 255, 0.4),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.7);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 
+                    0 30px 60px rgba(0, 0, 0, 0.6),
+                    0 0 0 25px rgba(255, 255, 255, 0.1),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.9);
+                transform: scale(1.05);
+            }
+            100% { 
+                box-shadow: 
+                    0 25px 50px rgba(0, 0, 0, 0.5),
+                    0 0 0 0 rgba(255, 255, 255, 0.4),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.7);
+                transform: scale(1);
+            }
+        }
+
+        .premium-play-button:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(255, 255, 255, 0.98) 50%, 
+                rgba(255, 255, 255, 1) 100%);
+            transform: scale(1.2);
+            box-shadow: 
+                0 40px 80px rgba(0, 0, 0, 0.7),
+                0 0 0 35px rgba(255, 255, 255, 0.15),
+                inset 0 3px 0 rgba(255, 255, 255, 0.9);
+            animation: none;
+        }
+
+        .premium-play-icon {
+            width: 48px;
+            height: 48px;
+            margin-left: 10px;
+            fill: #0f0f23;
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+            transition: all 0.3s ease;
+        }
+
+        .premium-play-button:hover .premium-play-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+        }
+
+        /* منطقة النص المحسنة */
+        .premium-content-text {
+            flex: 1;
+            padding: 100px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.98) 0%, 
+                rgba(248, 250, 252, 0.96) 30%, 
+                rgba(241, 245, 249, 0.98) 70%, 
+                rgba(226, 232, 240, 0.95) 100%);
+            backdrop-filter: blur(30px);
+            position: relative;
+        }
+
+        .premium-content-text::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(180deg, 
+                #3b82f6 0%, 
+                #8b5cf6 25%, 
+                #ec4899 50%, 
+                #f59e0b 75%, 
+                #10b981 100%);
+            border-radius: 0 4px 4px 0;
+            animation: borderGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { opacity: 0.8; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.1); }
+        }
+
+        .premium-video-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, 
+                #0f172a 0%, 
+                #1e293b 30%, 
+                #475569 60%, 
+                #64748b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+            animation: slideInRight 1s ease-out;
+            position: relative;
+        }
+
+        .premium-video-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 2px;
+            animation: titleUnderline 2s ease-in-out infinite;
+        }
+
+        @keyframes titleUnderline {
+            0%, 100% { width: 80px; opacity: 0.7; }
+            50% { width: 120px; opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(60px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .premium-video-description {
+            font-size: 1.5rem;
+            line-height: 1.9;
+            color: #475569;
+            margin-bottom: 50px;
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
+            animation: slideInRight 1s ease-out 0.3s both;
+            font-weight: 400;
+        }
+
+        /* زر الإجراء المحسن */
+        .premium-cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 20px;
+            background: linear-gradient(135deg, 
+                #3b82f6 0%, 
+                #1d4ed8 30%, 
+                #1e40af 70%, 
+                #1e3a8a 100%);
+            color: white;
+            padding: 25px 50px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 
+                0 25px 50px rgba(59, 130, 246, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+            width: fit-content;
+            position: relative;
+            overflow: hidden;
+            animation: slideInRight 1s ease-out 0.6s both;
+        }
+
+        .premium-cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.3), 
+                transparent);
+            transition: left 0.8s ease;
+        }
+
+        .premium-cta-button:hover::before {
+            left: 100%;
+        }
+
+        .premium-cta-button:hover {
+            background: linear-gradient(135deg, 
+                #1d4ed8 0%, 
+                #1e40af 30%, 
+                #1e3a8a 70%, 
+                #1e3a8a 100%);
+            transform: translateY(-6px) scale(1.08);
+            box-shadow: 
+                0 35px 70px rgba(59, 130, 246, 0.7),
+                inset 0 2px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        .premium-cta-icon {
+            width: 24px;
+            height: 24px;
+            transition: transform 0.4s ease;
+        }
+
+        .premium-cta-button:hover .premium-cta-icon {
+            transform: translateX(6px) scale(1.1);
+        }
+
+        /* أزرار التنقل المحسنة */
+        .premium-navigation {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.98) 0%, 
+                rgba(255, 255, 255, 0.92) 50%, 
+                rgba(255, 255, 255, 0.95) 100%);
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 30;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(255, 255, 255, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(25px);
+        }
+
+        .premium-navigation:hover {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 1) 0%, 
+                rgba(255, 255, 255, 0.98) 50%, 
+                rgba(255, 255, 255, 1) 100%);
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 
+                0 35px 70px rgba(0, 0, 0, 0.4),
+                0 0 0 25px rgba(255, 255, 255, 0.15),
+                inset 0 3px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .premium-navigation.prev { left: 60px; }
+        .premium-navigation.next { right: 60px; }
+
+        .premium-nav-icon {
+            width: 32px;
+            height: 32px;
+            fill: #0f172a;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+            transition: all 0.3s ease;
+        }
+
+        .premium-navigation:hover .premium-nav-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+        }
+
+        /* النقاط المحسنة */
+        .premium-dots {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 80px;
+        }
+
+        .premium-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.4) 0%, 
+                rgba(255, 255, 255, 0.2) 100%);
+            cursor: pointer;
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            box-shadow: 
+                0 6px 12px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+        }
+
+        .premium-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.7);
+            transition: all 0.4s ease;
+        }
+
+        .premium-dot.active {
+            background: linear-gradient(135deg, 
+                #3b82f6 0%, 
+                #8b5cf6 50%, 
+                #ec4899 100%);
+            transform: scale(1.4);
+            box-shadow: 
+                0 10px 20px rgba(59, 130, 246, 0.5),
+                0 0 0 10px rgba(59, 130, 246, 0.15),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        .premium-dot.active::before {
+            background: rgba(255, 255, 255, 0.95);
+            width: 10px;
+            height: 10px;
+        }
+
+        .premium-dot:hover {
+            background: linear-gradient(135deg, 
+                rgba(59, 130, 246, 0.9) 0%, 
+                rgba(139, 92, 246, 0.9) 100%);
+            transform: scale(1.3);
+        }
+
+        /* شريط التقدم المحسن */
+        .premium-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.15);
+            overflow: hidden;
+        }
+
+        .premium-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, 
+                #3b82f6 0%, 
+                #8b5cf6 25%, 
+                #ec4899 50%, 
+                #f59e0b 75%, 
+                #10b981 100%);
+            width: 0%;
+            transition: width 0.4s ease;
+            position: relative;
+        }
+
+        .premium-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30px;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.8));
+            animation: progressShine 3s ease-in-out infinite;
+        }
+
+        @keyframes progressShine {
+            0% { opacity: 0; transform: translateX(-10px); }
+            50% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(10px); }
+        }
+
+        /* تأثيرات إضافية */
+        .premium-slide-counter {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 25;
+        }
+
+        .premium-loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .premium-loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .premium-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design المحسن */
+        @media (max-width: 1200px) {
+            .premium-video-slider {
+                padding: 80px 0;
+            }
+
+            .premium-container {
+                padding: 0 40px;
+            }
+
+            .premium-title {
+                font-size: 4rem;
+            }
+
+            .premium-content-text {
+                padding: 80px 60px;
+            }
+
+            .premium-video-title {
+                font-size: 3.2rem;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .premium-title {
+                font-size: 3.5rem;
+            }
+
+            .premium-content-wrapper {
+                flex-direction: column;
+                min-height: auto;
+            }
+
+            .premium-content-text {
+                padding: 60px 50px;
+                text-align: center;
+            }
+
+            .premium-video-title {
+                font-size: 2.8rem;
+            }
+
+            .premium-navigation {
+                width: 70px;
+                height: 70px;
+            }
+
+            .premium-navigation.prev { left: 40px; }
+            .premium-navigation.next { right: 40px; }
+        }
+
+        @media (max-width: 768px) {
+            .premium-video-slider {
+                padding: 60px 0;
+                min-height: auto;
+            }
+
+            .premium-container {
+                padding: 0 30px;
+            }
+
+            .premium-title {
+                font-size: 2.8rem;
+            }
+
+            .premium-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .premium-content-text {
+                padding: 50px 40px;
+            }
+
+            .premium-video-title {
+                font-size: 2.2rem;
+            }
+
+            .premium-video-description {
+                font-size: 1.3rem;
+            }
+
+            .premium-play-button {
+                width: 120px;
+                height: 120px;
+            }
+
+            .premium-play-icon {
+                width: 40px;
+                height: 40px;
+            }
+
+            .premium-navigation {
+                width: 60px;
+                height: 60px;
+            }
+
+            .premium-navigation.prev { left: 30px; }
+            .premium-navigation.next { right: 30px; }
+
+            .premium-nav-icon {
+                width: 26px;
+                height: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .premium-title {
+                font-size: 2.2rem;
+            }
+
+            .premium-content-text {
+                padding: 40px 30px;
+            }
+
+            .premium-video-title {
+                font-size: 1.8rem;
+            }
+
+            .premium-cta-button {
+                padding: 20px 40px;
+                font-size: 1.1rem;
+            }
+
+            .premium-navigation {
+                width: 50px;
+                height: 50px;
+            }
+
+            .premium-navigation.prev { left: 20px; }
+            .premium-navigation.next { right: 20px; }
+
+            .premium-nav-icon {
+                width: 20px;
+                height: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="premium-video-slider">
+        <!-- Floating Particles Enhanced -->
+        <div class="floating-particles" id="particlesContainer">
+            <!-- الجسيمات ستُضاف ديناميكياً -->
+        </div>
+
+        <div class="premium-container">
+            <div class="premium-header">
+                <h1 class="premium-title">تجربة بصرية استثنائية</h1>
+                <p class="premium-subtitle">اكتشف عالماً من الإبداع والتميز من خلال مجموعة مختارة من الفيديوهات عالية الجودة التي تحكي قصة علامتنا التجارية بطريقة مذهلة وملهمة</p>
+            </div>
+
+            <div class="premium-slider-wrapper">
+                <!-- عداد الشرائح -->
+                <div class="premium-slide-counter">
+                    <span id="currentSlideNum">1</span> / <span id="totalSlidesNum">3</span>
+                </div>
+
+                <!-- طبقة التحميل -->
+                <div class="premium-loading-overlay" id="loadingOverlay">
+                    <div class="premium-spinner"></div>
+                </div>
+
+                <div class="premium-slides-track" id="premiumSlidesTrack">
+                    <!-- الشريحة الأولى -->
+                    <div class="premium-slide" data-slide="0">
+                        <div class="premium-content-wrapper">
+                            <div class="premium-video-container">
+                                <div class="premium-video-aspect">
+                                    <div class="premium-video-cover" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3)), url('https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&h=800&fit=crop') center/cover;">
+                                        <div class="premium-play-button" onclick="playPremiumVideo(this, 'demo', '1')">
+                                            <svg class="premium-play-icon" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="premium-video-iframe"></div>
+                                </div>
+                            </div>
+
+                            <div class="premium-content-text">
+                                <h3 class="premium-video-title">رحلة الإبداع والابتكار</h3>
+                                <p class="premium-video-description">انطلق معنا في رحلة استثنائية تكشف أسرار الإبداع والابتكار، حيث نمزج بين التقنية المتطورة والحرفية العالية لنقدم لك تجربة لا تُنسى تتجاوز كل التوقعات وتفتح آفاقاً جديدة من الإلهام والتميز.</p>
+                                <a href="#" class="premium-cta-button">
+                                    استكشف المنتجات
+                                    <svg class="premium-cta-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الشريحة الثانية -->
+                    <div class="premium-slide" data-slide="1">
+                        <div class="premium-content-wrapper">
+                            <div class="premium-video-container">
+                                <div class="premium-video-aspect">
+                                    <div class="premium-video-cover" style="background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(168, 85, 247, 0.3)), url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1200&h=800&fit=crop') center/cover;">
+                                        <div class="premium-play-button" onclick="playPremiumVideo(this, 'demo', '2')">
+                                            <svg class="premium-play-icon" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="premium-video-iframe"></div>
+                                </div>
+                            </div>
+
+                            <div class="premium-content-text">
+                                <h3 class="premium-video-title">شهادات العملاء المتميزين</h3>
+                                <p class="premium-video-description">استمع إلى قصص نجاح حقيقية من عملائنا الكرام واكتشف كيف غيّرت منتجاتنا وخدماتنا حياتهم للأفضل. تجارب ملهمة وشهادات صادقة تعكس التزامنا بتقديم الأفضل دائماً وتحقيق رضا عملائنا الكامل.</p>
+                                <a href="#" class="premium-cta-button">
+                                    اقرأ المزيد من التقييمات
+                                    <svg class="premium-cta-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الشريحة الثالثة -->
+                    <div class="premium-slide" data-slide="2">
+                        <div class="premium-content-wrapper">
+                            <div class="premium-video-container">
+                                <div class="premium-video-aspect">
+                                    <div class="premium-video-cover" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.3), rgba(245, 158, 11, 0.3)), url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop') center/cover;">
+                                        <div class="premium-play-button" onclick="playPremiumVideo(this, 'demo', '3')">
+                                            <svg class="premium-play-icon" viewBox="0 0 24 24">
+                                                <path d="M8 5v14l11-7z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="premium-video-iframe"></div>
+                                </div>
+                            </div>
+
+                            <div class="premium-content-text">
+                                <h3 class="premium-video-title">دليل التميز الشامل</h3>
+                                <p class="premium-video-description">اكتشف الطريقة المثلى للاستفادة من منتجاتنا وخدماتنا من خلال دليل شامل وتفاعلي مصمم خصيصاً لك. نصائح الخبراء، تقنيات متقدمة، وأسرار النجاح - كل ما تحتاجه لتحقيق أقصى استفادة ممكنة.</p>
+                                <a href="#" class="premium-cta-button">
+                                    ابدأ التجربة الآن
+                                    <svg class="premium-cta-icon" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- أزرار التنقل -->
+                <button class="premium-navigation prev" onclick="previousPremiumSlide()" aria-label="الشريحة السابقة">
+                    <svg class="premium-nav-icon" viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                
+                <button class="premium-navigation next" onclick="nextPremiumSlide()" aria-label="الشريحة التالية">
+                    <svg class="premium-nav-icon" viewBox="0 0 24 24">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </button>
+
+                <!-- شريط التقدم -->
+                <div class="premium-progress">
+                    <div class="premium-progress-bar" id="premiumProgressBar"></div>
+                </div>
+            </div>
+
+            <!-- النقاط -->
+            <div class="premium-dots">
+                <div class="premium-dot active" onclick="goToPremiumSlide(0)" aria-label="الشريحة 1"></div>
+                <div class="premium-dot" onclick="goToPremiumSlide(1)" aria-label="الشريحة 2"></div>
+                <div class="premium-dot" onclick="goToPremiumSlide(2)" aria-label="الشريحة 3"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // متغيرات عامة
+        let currentPremiumSlide = 0;
+        const totalPremiumSlides = 3;
+        const premiumSliderTrack = document.getElementById('premiumSlidesTrack');
+        const premiumProgressBar = document.getElementById('premiumProgressBar');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const currentSlideNum = document.getElementById('currentSlideNum');
+        const totalSlidesNum = document.getElementById('totalSlidesNum');
+        let premiumAutoSlideInterval;
+        let premiumProgressInterval;
+        const autoSlideDelay = 12000; // 12 ثانية
+
+        // تهيئة العدادات
+        if (totalSlidesNum) {
+            totalSlidesNum.textContent = totalPremiumSlides;
+        }
+
+        // إيقاف جميع الفيديوهات
+        function stopAllPremiumVideos() {
+            document.querySelectorAll('.premium-video').forEach(video => {
+                if (!video.paused) {
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            });
+
+            document.querySelectorAll('.premium-video-iframe').forEach(container => {
+                if (container.innerHTML.trim() !== '') {
+                    container.innerHTML = '';
+                    const cover = container.previousElementSibling;
+                    if (cover && cover.classList.contains('premium-video-cover')) {
+                        cover.classList.remove('hidden');
+                    }
+                }
+            });
+        }
+
+        // إظهار طبقة التحميل
+        function showLoadingOverlay() {
+            if (loadingOverlay) {
+                loadingOverlay.classList.add('active');
+            }
+        }
+
+        // إخفاء طبقة التحميل
+        function hideLoadingOverlay() {
+            if (loadingOverlay) {
+                setTimeout(() => {
+                    loadingOverlay.classList.remove('active');
+                }, 500);
+            }
+        }
+
+        // تحديث شريط التقدم
+        function updatePremiumProgress() {
+            const progress = ((currentPremiumSlide + 1) / totalPremiumSlides) * 100;
+            if (premiumProgressBar) {
+                premiumProgressBar.style.width = `${progress}%`;
+            }
+        }
+
+        // تحديث عداد الشرائح
+        function updateSlideCounter() {
+            if (currentSlideNum) {
+                currentSlideNum.textContent = currentPremiumSlide + 1;
+            }
+        }
+
+        // تحديث السلايدر
+        function updatePremiumSlider() {
+            if (!premiumSliderTrack) return;
+            
+            showLoadingOverlay();
+            stopAllPremiumVideos();
+            
+            const translateX = -currentPremiumSlide * 100;
+            premiumSliderTrack.style.transform = `translateX(${translateX}%)`;
+            
+            // تحديث النقاط
+            document.querySelectorAll('.premium-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentPremiumSlide);
+            });
+
+            updatePremiumProgress();
+            updateSlideCounter();
+            
+            // إخفاء طبقة التحميل بعد انتهاء الانتقال
+            setTimeout(hideLoadingOverlay, 1400);
+        }
+
+        // السلايد التالي
+        function nextPremiumSlide() {
+            currentPremiumSlide = (currentPremiumSlide + 1) % totalPremiumSlides;
+            updatePremiumSlider();
+            resetPremiumAutoSlide();
+        }
+
+        // السلايد السابق
+        function previousPremiumSlide() {
+            currentPremiumSlide = (currentPremiumSlide - 1 + totalPremiumSlides) % totalPremiumSlides;
+            updatePremiumSlider();
+            resetPremiumAutoSlide();
+        }
+
+        // الذهاب إلى سلايد محدد
+        function goToPremiumSlide(index) {
+            if (index === currentPremiumSlide) return;
+            currentPremiumSlide = index;
+            updatePremiumSlider();
+            resetPremiumAutoSlide();
+        }
+
+        // تشغيل الفيديو
+        function playPremiumVideo(button, platform, videoId) {
+            const cover = button.parentElement;
+            const container = cover.nextElementSibling;
+            
+            stopAllPremiumVideos();
+            stopPremiumAutoSlide();
+            showLoadingOverlay();
+            
+            let videoContent = '';
+            if (platform === 'youtube') {
+                videoContent = `<iframe class="premium-video" src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&iv_load_policy=3" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            } else if (platform === 'vimeo') {
+                videoContent = `<iframe class="premium-video" src="https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>`;
+            } else {
+                // فيديو تجريبي
+                videoContent = `<div class="premium-video" style="width: 100%; height: 100%; background: linear-gradient(45deg, #3b82f6, #8b5cf6); display: flex; align-items: center; justify-content: center; color: white; font-size: 2rem; font-weight: bold;">فيديو تجريبي ${videoId}</div>`;
+            }
+            
+            container.innerHTML = videoContent;
+            cover.classList.add('hidden');
+            
+            setTimeout(hideLoadingOverlay, 1000);
+        }
+
+        // التشغيل التلقائي
+        function startPremiumAutoSlide() {
+            if (totalPremiumSlides > 1) {
+                premiumAutoSlideInterval = setInterval(() => {
+                    nextPremiumSlide();
+                }, autoSlideDelay);
+            }
+        }
+
+        function stopPremiumAutoSlide() {
+            if (premiumAutoSlideInterval) {
+                clearInterval(premiumAutoSlideInterval);
+            }
+        }
+
+        function resetPremiumAutoSlide() {
+            stopPremiumAutoSlide();
+            setTimeout(startPremiumAutoSlide, 3000);
+        }
+
+        // إنشاء الجسيمات العائمة
+        function createPremiumParticles() {
+            const particlesContainer = document.getElementById('particlesContainer');
+            if (!particlesContainer) return;
+
+            // إنشاء جسيمات أولية
+            for (let i = 0; i < 12; i++) {
+                createParticle(particlesContainer, 'small');
+            }
+            for (let i = 0; i < 8; i++) {
+                createParticle(particlesContainer, 'medium');
+            }
+            for (let i = 0; i < 5; i++) {
+                createParticle(particlesContainer, 'large');
+            }
+
+            // إنشاء جسيمات جديدة دورياً
+            setInterval(() => {
+                if (document.querySelectorAll('.particle').length < 30) {
+                    const types = ['small', 'medium', 'large'];
+                    const randomType = types[Math.floor(Math.random() * types.length)];
+                    createParticle(particlesContainer, randomType);
+                }
+            }, 2000);
+        }
+
+        function createParticle(container, type) {
+            const particle = document.createElement('div');
+            particle.className = `particle particle-${type}`;
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 10 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            container.appendChild(particle);
+
+            // حذف الجسيم بعد انتهاء الحركة
+            setTimeout(() => {
+                if (particle.parentNode) {
+                    particle.parentNode.removeChild(particle);
+                }
+            }, 35000);
+        }
+
+        // دعم اللمس المحسّن
+        let premiumTouchStartX = 0;
+        let premiumTouchEndX = 0;
+        let premiumIsDragging = false;
+        let premiumStartTime = 0;
+
+        if (premiumSliderTrack) {
+            // Touch Events
+            premiumSliderTrack.addEventListener('touchstart', (e) => {
+                premiumTouchStartX = e.touches[0].clientX;
+                premiumStartTime = Date.now();
+                premiumIsDragging = true;
+                stopPremiumAutoSlide();
+            }, { passive: true });
+
+            premiumSliderTrack.addEventListener('touchmove', (e) => {
+                if (!premiumIsDragging) return;
+                premiumTouchEndX = e.touches[0].clientX;
+                
+                // منع التمرير الافتراضي أثناء السحب
+                e.preventDefault();
+            }, { passive: false });
+
+            premiumSliderTrack.addEventListener('touchend', () => {
+                if (!premiumIsDragging) return;
+                
+                const timeDiff = Date.now() - premiumStartTime;
+                const distance = Math.abs(premiumTouchStartX - premiumTouchEndX);
+                const threshold = 80;
+                const maxTime = 600;
+                
+                if (distance > threshold && timeDiff < maxTime) {
+                    if (premiumTouchStartX > premiumTouchEndX) {
+                        nextPremiumSlide();
+                    } else {
+                        previousPremiumSlide();
+                    }
+                } else {
+                    resetPremiumAutoSlide();
+                }
+                
+                premiumIsDragging = false;
+            }, { passive: true });
+
+            // Mouse Events
+            let premiumMouseStartX = 0;
+            let premiumMouseEndX = 0;
+            let premiumIsMouseDragging = false;
+
+            premiumSliderTrack.addEventListener('mousedown', (e) => {
+                premiumMouseStartX = e.clientX;
+                premiumIsMouseDragging = true;
+                stopPremiumAutoSlide();
+                e.preventDefault();
+            });
+
+            premiumSliderTrack.addEventListener('mousemove', (e) => {
+                if (!premiumIsMouseDragging) return;
+                premiumMouseEndX = e.clientX;
+            });
+
+            premiumSliderTrack.addEventListener('mouseup', () => {
+                if (!premiumIsMouseDragging) return;
+                
+                const distance = Math.abs(premiumMouseStartX - premiumMouseEndX);
+                const threshold = 80;
+                
+                if (distance > threshold) {
+                    if (premiumMouseStartX > premiumMouseEndX) {
+                        nextPremiumSlide();
+                    } else {
+                        previousPremiumSlide();
+                    }
+                } else {
+                    resetPremiumAutoSlide();
+                }
+                
+                premiumIsMouseDragging = false;
+            });
+
+            premiumSliderTrack.addEventListener('mouseleave', () => {
+                premiumIsMouseDragging = false;
+                resetPremiumAutoSlide();
+            });
+        }
+
+        // تحكم بلوحة المفاتيح المحسن
+        document.addEventListener('keydown', (e) => {
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    previousPremiumSlide();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    nextPremiumSlide();
+                    break;
+                case ' ':
+                    e.preventDefault();
+                    if (premiumAutoSlideInterval) {
+                        stopPremiumAutoSlide();
+                    } else {
+                        startPremiumAutoSlide();
+                    }
+                    break;
+                case 'Home':
+                    e.preventDefault();
+                    goToPremiumSlide(0);
+                    break;
+                case 'End':
+                    e.preventDefault();
+                    goToPremiumSlide(totalPremiumSlides - 1);
+                    break;
+            }
+        });
+
+        // إدارة رؤية الصفحة
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                stopPremiumAutoSlide();
+                stopAllPremiumVideos();
+            } else {
+                startPremiumAutoSlide();
+            }
+        });
+
+        // Intersection Observer للأداء
+        const premiumSliderObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startPremiumAutoSlide();
+                } else {
+                    stopPremiumAutoSlide();
+                }
+            });
+        }, { threshold: 0.3 });
+
+        // تهيئة السلايدر
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePremiumSlider();
+            createPremiumParticles();
+            
+            // مراقبة السلايدر
+            const sliderElement = document.querySelector('.premium-video-slider');
+            if (sliderElement) {
+                premiumSliderObserver.observe(sliderElement);
+            }
+            
+            // بدء التشغيل التلقائي
+            setTimeout(startPremiumAutoSlide, 3000);
+
+            // تطبيق تأثيرات إضافية
+            const premiumSliderWrapper = document.querySelector('.premium-slider-wrapper');
+            if (premiumSliderWrapper) {
+                premiumSliderWrapper.addEventListener('mouseenter', () => {
+                    premiumSliderWrapper.style.transform = 'perspective(1200px) rotateX(0deg) scale(1.03)';
+                });
+
+                premiumSliderWrapper.addEventListener('mouseleave', () => {
+                    premiumSliderWrapper.style.transform = 'perspective(1200px) rotateX(3deg) scale(1)';
+                });
+            }
+
+            console.log('Premium Video Slider تم تهيئته بنجاح! 🚀');
+        });
+
+        // تنظيف عند مغادرة الصفحة
+        window.addEventListener('beforeunload', () => {
+            stopAllPremiumVideos();
+            stopPremiumAutoSlide();
+        });
+
+        // معالجة الأخطاء
+        window.addEventListener('error', (e) => {
+            console.error('خطأ في Premium Video Slider:', e.error);
+            hideLoadingOverlay();
+        });
+
+        // دعم الضغط المطول على الأجهزة المحمولة
+        let longPressTimer;
+        
+        if (premiumSliderTrack) {
+            premiumSliderTrack.addEventListener('touchstart', (e) => {
+                longPressTimer = setTimeout(() => {
+                    // إيقاف/تشغيل التشغيل التلقائي عند الضغط المطول
+                    if (premiumAutoSlideInterval) {
+                        stopPremiumAutoSlide();
+                        // إشعار بصري
+                        document.body.style.background = '#ff0000';
+                        setTimeout(() => {
+                            document.body.style.background = '';
+                        }, 200);
+                    } else {
+                        startPremiumAutoSlide();
+                        // إشعار بصري
+                        document.body.style.background = '#00ff00';
+                        setTimeout(() => {
+                            document.body.style.background = '';
+                        }, 200);
+                    }
+                }, 1000);
+            });
+
+            premiumSliderTrack.addEventListener('touchend', () => {
+                clearTimeout(longPressTimer);
+            });
+
+            premiumSliderTrack.addEventListener('touchmove', () => {
+                clearTimeout(longPressTimer);
+            });
+        }
+    </script>
+</body>
+</html>
