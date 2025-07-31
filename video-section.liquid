@@ -14,158 +14,303 @@
     }
   }
 
+  .video-showcase {
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    margin: 2rem 0;
+  }
+
+  .video-showcase::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    z-index: 1;
+  }
+
+  .video-showcase__container {
+    position: relative;
+    z-index: 2;
+    padding: 3rem 2rem;
+  }
+
   .video-carousel {
     position: relative;
     overflow: hidden;
-    border-radius: 0.5rem;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   }
 
   .video-carousel__container {
     display: flex;
-    transition: transform 0.5s ease-in-out;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .video-carousel__slide {
     min-width: 100%;
     flex-shrink: 0;
+    padding: 2rem;
   }
 
   .video-item {
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 1rem;
+    position: relative;
   }
 
   .video-item__content {
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
   }
 
   .video-item__title {
-    margin: 0 0 1rem 0;
-    font-size: 1.5rem;
-    font-weight: 600;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     text-align: center;
+    line-height: 1.2;
   }
 
   .video-item__description {
-    margin: 1rem 0;
-    color: rgba(var(--color-foreground), 0.75);
-    line-height: 1.5;
+    color: #666;
+    line-height: 1.6;
     text-align: center;
+    font-size: 1.1rem;
+    margin: 0;
   }
 
   .video-item__button {
-    margin-top: 1rem;
     text-align: center;
+    margin-top: 1rem;
   }
 
   .video-item__button .button {
-    background: var(--color-button);
-    color: var(--color-button-text);
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.25rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
     text-decoration: none;
     display: inline-block;
     font-weight: 600;
-    transition: opacity 0.2s ease;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .video-item__button .button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .video-item__button .button:hover::before {
+    left: 100%;
   }
 
   .video-item__button .button:hover {
-    opacity: 0.8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
   }
 
   .video-item__media {
     position: relative;
     width: 100%;
-    border-radius: 0.5rem;
+    border-radius: 15px;
     overflow: hidden;
-    margin-bottom: 1rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .video-item__media:hover {
+    transform: scale(1.02);
   }
 
   .carousel-nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
-    border-radius: 50%;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 10;
-    transition: all 0.2s ease;
-  }
-
-  .carousel-nav:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  .carousel-nav--prev {
-    left: 1rem;
-  }
-
-  .carousel-nav--next {
-    right: 1rem;
-  }
-
-  .carousel-nav svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    fill: var(--color-foreground);
-  }
-
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-
-  .carousel-dot {
-    width: 0.75rem;
-    height: 0.75rem;
-    border-radius: 50%;
-    background: rgba(var(--color-foreground), 0.3);
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .carousel-dot.active {
-    background: var(--color-foreground);
-  }
-
-  .deferred-media__poster-button {
-    background: rgba(0, 0, 0, 0.8);
     border-radius: 50%;
     width: 4rem;
     height: 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid white;
-    transition: all 0.2s ease;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+
+  .carousel-nav:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  }
+
+  .carousel-nav--prev {
+    left: -2rem;
+  }
+
+  .carousel-nav--next {
+    right: -2rem;
+  }
+
+  .carousel-nav svg {
+    width: 2rem;
+    height: 2rem;
+    fill: white;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .carousel-dot {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: rgba(102, 126, 234, 0.3);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .carousel-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-dot.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transform: scale(1.2);
+  }
+
+  .carousel-dot.active::before {
+    background: white;
+  }
+
+  .deferred-media__poster-button {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .deferred-media__poster-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+  }
+
+  .deferred-media__poster-button:hover::before {
+    transform: translateX(100%);
   }
 
   .deferred-media__poster-button:hover {
-    background: rgba(0, 0, 0, 0.9);
     transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
   }
 
   .deferred-media__poster-button .svg-wrapper {
-    width: 2rem;
-    height: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    position: relative;
+    z-index: 2;
   }
 
   .deferred-media__poster-button .svg-wrapper svg {
     fill: white;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  }
+
+  .video-counter {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255,255,255,0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #667eea;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+  }
+
+  @media (max-width: 768px) {
+    .video-showcase__container {
+      padding: 2rem 1rem;
+    }
+    
+    .video-carousel__slide {
+      padding: 1.5rem;
+    }
+    
+    .video-item__title {
+      font-size: 1.5rem;
+    }
+    
+    .carousel-nav {
+      width: 3rem;
+      height: 3rem;
+    }
+    
+    .carousel-nav--prev {
+      left: 0.5rem;
+    }
+    
+    .carousel-nav--next {
+      right: 0.5rem;
+    }
   }
 {%- endstyle -%}
 
@@ -184,153 +329,165 @@
     </div>
 
     {%- if section.blocks.size > 0 -%}
-      <div class="video-carousel">
-        <div class="video-carousel__container" id="carousel-{{ section.id }}">
-          {%- for block in section.blocks -%}
-            {%- liquid
-              assign video_id = block.settings.video.id | default: block.settings.video_url.id
-              assign video_alt = block.settings.video.alt | default: block.settings.description
-              assign alt = 'sections.video.load_video' | t: description: video_alt | escape
-              assign poster = block.settings.video.preview_image | default: block.settings.cover_image
-            -%}
+      <div class="video-showcase">
+        <div class="video-showcase__container">
+          <div class="video-carousel">
+            <div class="video-carousel__container" id="carousel-{{ section.id }}">
+              {%- for block in section.blocks -%}
+                {%- liquid
+                  assign video_id = block.settings.video.id | default: block.settings.video_url.id
+                  assign video_alt = block.settings.video.alt | default: block.settings.description
+                  assign alt = 'sections.video.load_video' | t: description: video_alt | escape
+                  assign poster = block.settings.video.preview_image | default: block.settings.cover_image
+                -%}
 
-            {%- capture sizes -%}
-              {% if section.settings.full_width -%}
-                100vw
-              {%- else -%}
-                (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px)
-                calc(100vw - 10rem), 100vw
-              {%- endif %}
-            {%- endcapture -%}
+                {%- capture sizes -%}
+                  {% if section.settings.full_width -%}
+                    100vw
+                  {%- else -%}
+                    (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 }}px, (min-width: 750px)
+                    calc(100vw - 10rem), 100vw
+                  {%- endif %}
+                {%- endcapture -%}
 
-            <div class="video-carousel__slide">
-              <div class="video-item" {{ block.shopify_attributes }}>
-                <div class="video-item__content">
-                  {%- unless block.settings.title == blank -%}
-                    <h3 class="video-item__title">{{ block.settings.title }}</h3>
-                  {%- endunless -%}
+                <div class="video-carousel__slide">
+                  <div class="video-item" {{ block.shopify_attributes }}>
+                    <div class="video-item__content">
+                      {%- unless block.settings.title == blank -%}
+                        <h3 class="video-item__title">{{ block.settings.title }}</h3>
+                      {%- endunless -%}
 
-                  <div class="video-item__media">
-                    <deferred-media
-                      class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                      data-media-id="{{ video_id }}-{{ forloop.index }}"
-                      {% if poster != null %}
-                        style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
-                      {% endif %}
-                    >
-                      <button
-                        id="Deferred-Poster-Modal-{{ video_id }}-{{ forloop.index }}"
-                        class="video-section__poster media deferred-media__poster media--landscape"
-                        type="button"
-                        aria-label="{{ alt }}"
-                      >
-                        {%- if poster != null -%}
-                          {{
-                            poster
-                            | image_url: width: 3840
-                            | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
-                          }}
-                        {%- else -%}
-                          {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                        {%- endif -%}
-                        <span class="deferred-media__poster-button motion-reduce">
-                          <span class="svg-wrapper">
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M8 5v14l11-7z"/>
-                            </svg>
-                          </span>
-                        </span>
-                      </button>
-                      <template>
-                        {%- if block.settings.video == null and block.settings.video_url != null -%}
-                          {%- liquid
-                            assign loop = ''
-                            if section.settings.enable_video_looping
-                              assign loop = '&loop=1&playlist=' | append: video_id
-                            endif
-                          -%}
-                          {%- if block.settings.video_url.type == 'youtube' -%}
-                            <iframe
-                              src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
-                              class="js-youtube"
-                              allow="autoplay; encrypted-media"
-                              allowfullscreen
-                              title="{{ block.settings.description | escape }}"
-                            ></iframe>
-                          {%- else -%}
-                            <iframe
-                              src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
-                              class="js-vimeo"
-                              allow="autoplay; encrypted-media"
-                              allowfullscreen
-                              title="{{ block.settings.description | escape }}"
-                            ></iframe>
-                          {%- endif -%}
-                        {%- else -%}
-                          {{
-                            block.settings.video
-                            | video_tag:
-                              image_size: '1100x',
-                              autoplay: true,
-                              loop: section.settings.enable_video_looping,
-                              controls: true,
-                              muted: false
-                          }}
-                        {%- endif -%}
-                      </template>
-                    </deferred-media>
-                  </div>
+                      <div class="video-item__media">
+                        <deferred-media
+                          class="video-section__media deferred-media gradient global-media-settings{% if section.settings.full_width %} global-media-settings--full-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                          data-media-id="{{ video_id }}-{{ forloop.index }}"
+                          {% if poster != null %}
+                            style="--ratio-percent: {{ 1 | divided_by: poster.aspect_ratio | times: 100 }}%;"
+                          {% endif %}
+                        >
+                          <button
+                            id="Deferred-Poster-Modal-{{ video_id }}-{{ forloop.index }}"
+                            class="video-section__poster media deferred-media__poster media--landscape"
+                            type="button"
+                            aria-label="{{ alt }}"
+                          >
+                            {%- if poster != null -%}
+                              {{
+                                poster
+                                | image_url: width: 3840
+                                | image_tag: sizes: sizes, widths: '375, 750, 1100, 1500, 1780, 2000, 3000, 3840', alt: alt
+                              }}
+                            {%- else -%}
+                              {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                            {%- endif -%}
+                            <span class="deferred-media__poster-button motion-reduce">
+                              <span class="svg-wrapper">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M8 5v14l11-7z"/>
+                                </svg>
+                              </span>
+                            </span>
+                          </button>
+                          <template>
+                            {%- if block.settings.video == null and block.settings.video_url != null -%}
+                              {%- liquid
+                                assign loop = ''
+                                if section.settings.enable_video_looping
+                                  assign loop = '&loop=1&playlist=' | append: video_id
+                                endif
+                              -%}
+                              {%- if block.settings.video_url.type == 'youtube' -%}
+                                <iframe
+                                  src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1&autoplay=1{{ loop }}"
+                                  class="js-youtube"
+                                  allow="autoplay; encrypted-media"
+                                  allowfullscreen
+                                  title="{{ block.settings.description | escape }}"
+                                ></iframe>
+                              {%- else -%}
+                                <iframe
+                                  src="https://player.vimeo.com/video/{{ video_id }}?autoplay=1{{ loop }}"
+                                  class="js-vimeo"
+                                  allow="autoplay; encrypted-media"
+                                  allowfullscreen
+                                  title="{{ block.settings.description | escape }}"
+                                ></iframe>
+                              {%- endif -%}
+                            {%- else -%}
+                              {{
+                                block.settings.video
+                                | video_tag:
+                                  image_size: '1100x',
+                                  autoplay: true,
+                                  loop: section.settings.enable_video_looping,
+                                  controls: true,
+                                  muted: false
+                              }}
+                            {%- endif -%}
+                          </template>
+                        </deferred-media>
+                      </div>
 
-                  {%- unless block.settings.description == blank -%}
-                    <div class="video-item__description">{{ block.settings.description }}</div>
-                  {%- endunless -%}
+                      {%- unless block.settings.description == blank -%}
+                        <div class="video-item__description">{{ block.settings.description }}</div>
+                      {%- endunless -%}
 
-                  {%- unless block.settings.button_text == blank or block.settings.button_link == blank -%}
-                    <div class="video-item__button">
-                      <a href="{{ block.settings.button_link }}" class="button">
-                        {{ block.settings.button_text }}
-                      </a>
+                      {%- unless block.settings.button_text == blank or block.settings.button_link == blank -%}
+                        <div class="video-item__button">
+                          <a href="{{ block.settings.button_link }}" class="button">
+                            {{ block.settings.button_text }}
+                          </a>
+                        </div>
+                      {%- endunless -%}
                     </div>
-                  {%- endunless -%}
+                  </div>
                 </div>
-              </div>
+              {%- endfor -%}
             </div>
-          {%- endfor -%}
-        </div>
 
-        {%- if section.blocks.size > 1 -%}
-          <button class="carousel-nav carousel-nav--prev" onclick="moveCarousel({{ section.id }}, -1)">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-            </svg>
-          </button>
-          <button class="carousel-nav carousel-nav--next" onclick="moveCarousel({{ section.id }}, 1)">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
-            </svg>
-          </button>
+            {%- if section.blocks.size > 1 -%}
+              <div class="video-counter">
+                <span id="current-{{ section.id }}">1</span> / <span id="total-{{ section.id }}">{{ section.blocks.size }}</span>
+              </div>
 
-          <div class="carousel-dots">
-            {%- for block in section.blocks -%}
-              <button 
-                class="carousel-dot{% if forloop.first %} active{% endif %}" 
-                onclick="goToSlide({{ section.id }}, {{ forloop.index0 }})"
-              ></button>
-            {%- endfor -%}
+              <button class="carousel-nav carousel-nav--prev" onclick="moveCarousel({{ section.id }}, -1)">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+              </button>
+              <button class="carousel-nav carousel-nav--next" onclick="moveCarousel({{ section.id }}, 1)">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
+                </svg>
+              </button>
+
+              <div class="carousel-dots">
+                {%- for block in section.blocks -%}
+                  <button 
+                    class="carousel-dot{% if forloop.first %} active{% endif %}" 
+                    onclick="goToSlide({{ section.id }}, {{ forloop.index0 }})"
+                  ></button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </div>
-        {%- endif -%}
+        </div>
       </div>
     {%- else -%}
-      <div class="video-carousel">
-        <div class="video-carousel__container">
-          <div class="video-carousel__slide">
-            <div class="video-item">
-              <div class="video-item__content">
-                <h3 class="video-item__title">Sample Video</h3>
-                <div class="video-item__media">
-                  {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+      <div class="video-showcase">
+        <div class="video-showcase__container">
+          <div class="video-carousel">
+            <div class="video-carousel__container">
+              <div class="video-carousel__slide">
+                <div class="video-item">
+                  <div class="video-item__content">
+                    <h3 class="video-item__title">Sample Video</h3>
+                    <div class="video-item__media">
+                      {{ 'hero-apparel-3' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                    </div>
+                    <div class="video-item__description">Add your first video using the theme editor.</div>
+                  </div>
                 </div>
-                <div class="video-item__description">Add your first video using the theme editor.</div>
               </div>
             </div>
           </div>
@@ -371,22 +528,38 @@
   function updateCarousel(sectionId) {
     const container = document.getElementById(`carousel-${sectionId}`);
     const dots = container.parentElement.querySelectorAll('.carousel-dot');
+    const currentCounter = document.getElementById(`current-${sectionId}`);
     
-    // Update slide position
+    // Update slide position with smooth animation
     container.style.transform = `translateX(-${currentSlide[sectionId] * 100}%)`;
     
     // Update dots
     dots.forEach((dot, index) => {
       dot.classList.toggle('active', index === currentSlide[sectionId]);
     });
+    
+    // Update counter
+    if (currentCounter) {
+      currentCounter.textContent = currentSlide[sectionId] + 1;
+    }
   }
   
-  // Auto-play functionality (optional)
-  function startAutoPlay(sectionId) {
-    setInterval(() => {
-      moveCarousel(sectionId, 1);
-    }, 5000); // Change slide every 5 seconds
-  }
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+      const activeCarousel = document.querySelector('.video-carousel:focus-within');
+      if (activeCarousel) {
+        const sectionId = activeCarousel.querySelector('.video-carousel__container').id.replace('carousel-', '');
+        moveCarousel(sectionId, -1);
+      }
+    } else if (e.key === 'ArrowRight') {
+      const activeCarousel = document.querySelector('.video-carousel:focus-within');
+      if (activeCarousel) {
+        const sectionId = activeCarousel.querySelector('.video-carousel__container').id.replace('carousel-', '');
+        moveCarousel(sectionId, 1);
+      }
+    }
+  });
   
   // Initialize carousels
   document.addEventListener('DOMContentLoaded', function() {
